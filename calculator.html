@@ -1,0 +1,243 @@
+<!-- Sergiu Hotea
+Prof Kwame Agyemang Baffour
+CSCI 39548 - Practical Web Development
+6/30/2023 
+Description: css, html, js that make sup the calculator.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>  <title>Calculator</title>
+
+<head>
+    <title>Calculator</title>
+    <div class="topnav">
+      <a href="index.html">Home</a>
+      <link rel="stylesheet" href="index.css">
+    </div>
+
+<br>
+
+
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* to set the minimum height of the body to fill the viewport */
+    }
+
+    .container {
+      flex: 1; /* to fill the remaining vertical space */
+      margin: 0 auto; /* to center the container horizontally */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    #display {
+      margin-bottom: 10px;
+      text-align: right;
+      width: 450px;
+      height: 50px; /* to set the height of the calculator screen */
+    }
+
+    button {
+      margin-top: 5px;
+      width: 50px; /* to set the width of the buttons */
+      height: 50px; /* to set the height of the buttons */
+      font-size: 14px;
+    }
+
+    .equals {
+      background-color: rgb(8, 91, 255) !important;
+      color: white !important;
+    }
+
+    .numbers button {
+      background-color: transparent !important;
+      color: grey !important;
+      transition: background-color 0.3s;
+    }
+
+    .numbers button:hover {
+      background-color: rgba(128, 128, 128, 0.5) !important;
+    }
+
+    .footer {
+      background-color: #333;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+    }
+ 
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <input type="text" id="display" class="form-control" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.PI')">π</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.E')">e</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('(')">(</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append(')')">)</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('%')">%</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="clearDisplay()">AC</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.sin(')">sin</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.log(')">log</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('7')">7</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('8')">8</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('9')">9</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('/')">÷</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.cos(')">cos</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.log(')">log</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('4')">4</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('5')">5</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('6')">6</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('*')">x</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.tan(')">tan</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.sqrt(')">√</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('1')">1</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('2')">2</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('3')">3</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('-')">-</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('Math.exp')">exp</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="addPowPrefix()">pow</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('0')">0</button>
+      </div>
+      <div class="col-md-2 numbers">
+        <button class="btn btn-secondary" onclick="append('.')">.</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary equals" onclick="calculate()">=</button>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-secondary" onclick="append('+')">+</button>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer">
+    <p>&copy; 2023 Calculator. All rights reserved.</p>
+</footer>
+
+  <script>
+    let powFlag = false;
+
+    function append(value) {
+      if (powFlag) {
+        powFlag = false;
+        document.getElementById('display').value += value + ',';
+      } else {
+        document.getElementById('display').value += value;
+      }
+    }
+
+    function addPowPrefix() {
+      powFlag = true;
+      document.getElementById('display').value += 'Math.pow(';
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function calculate() {
+      let expression = document.getElementById('display').value;
+
+      // to handle factorial calculations
+      expression = expression.replace(/!/g, 'factorial');
+
+      // to handle percentage calculation
+      expression = expression.replace(/%/g, '/100');
+
+      try {
+        let result = eval(expression);
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+
+    // a custom factorial function
+    function factorial(n) {
+      if (n === 0 || n === 1) {
+        return 1;
+      } else {
+        return n * factorial(n - 1);
+      }
+    }
+  </script>
+
+</body>
+</html>
